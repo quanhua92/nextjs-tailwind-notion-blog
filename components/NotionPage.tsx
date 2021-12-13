@@ -16,14 +16,15 @@ const Modal = dynamic(
 
 type Props = {
   recordMap: ExtendedRecordMap;
+  fullPage?: boolean;
 };
 
-const NotionPage: React.FC<Props> = ({ recordMap }) => {
+const NotionPage: React.FC<Props> = ({ recordMap, fullPage = true }) => {
   return (
     <div className="overflow-hidden">
       <NotionRenderer
         recordMap={recordMap}
-        fullPage={true}
+        fullPage={fullPage}
         darkMode={false}
         components={{
           code: Code,
