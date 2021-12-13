@@ -2,8 +2,8 @@ import { GetStaticProps, GetStaticPaths, NextPage } from "next";
 import Head from "next/head";
 import { NotionAPI } from "notion-client";
 import { ExtendedRecordMap } from "notion-types";
-import { NotionRenderer } from "react-notion-x";
 import { getPageTitle, getAllPagesInSpace } from "notion-utils";
+import NotionPage from "../components/NotionPage";
 
 const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
 
@@ -55,20 +55,15 @@ type Props = {
 };
 
 const BlogPage: NextPage<Props> = ({ recordMap }) => {
+  const title = getPageTitle(recordMap);
   return (
     <>
       <Head>
-        <title>Next.js + Tailwind CSS + Notion Blog</title>
+        <title>{title}</title>
       </Head>
       <div className="flex flex-col min-h-screen">
         <div className="container mx-auto max-w-5xl">
-          <div className="overflow-hidden">
-            <NotionRenderer
-              recordMap={recordMap}
-              fullPage={true}
-              darkMode={false}
-            />
-          </div>
+          <NotionPage recordMap={recordMap} />
         </div>
       </div>
     </>

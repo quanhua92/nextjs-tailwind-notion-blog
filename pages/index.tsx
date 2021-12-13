@@ -2,7 +2,7 @@ import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { NotionAPI } from "notion-client";
 import { ExtendedRecordMap } from "notion-types";
-import { NotionRenderer } from "react-notion-x";
+import NotionPage from "../components/NotionPage";
 
 const notion = new NotionAPI();
 
@@ -29,13 +29,7 @@ const Home: NextPage<Props> = ({ recordMap }) => {
       </Head>
       <div className="flex flex-col min-h-screen">
         <div className="container mx-auto max-w-5xl">
-          <div className="overflow-hidden">
-            <NotionRenderer
-              recordMap={recordMap}
-              fullPage={true}
-              darkMode={false}
-            />
-          </div>
+          <NotionPage recordMap={recordMap} />
         </div>
       </div>
     </>
