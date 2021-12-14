@@ -4,6 +4,7 @@ import { NotionAPI } from "notion-client";
 import { ExtendedRecordMap } from "notion-types";
 import { getPageTitle, getAllPagesInSpace } from "notion-utils";
 import NotionPage from "../components/NotionPage";
+import { getSiteConfig } from "../lib/get-site-config";
 
 const isDev = process.env.NODE_ENV === "development" || !process.env.NODE_ENV;
 
@@ -17,12 +18,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   }
 
-  const rootPageId = "067dd719a912471ea9a3ac10710e7fdf";
-  const rootSpaceId = undefined;
+  const siteConfig = getSiteConfig();
 
   const pages = await getAllPagesInSpace(
-    rootPageId,
-    rootSpaceId,
+    siteConfig.rootPageId,
+    siteConfig.rootSpaceId,
     notion.getPage.bind(notion),
     {
       traverseCollections: false,

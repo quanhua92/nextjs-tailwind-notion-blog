@@ -3,11 +3,14 @@ import Head from "next/head";
 import { NotionAPI } from "notion-client";
 import { ExtendedRecordMap } from "notion-types";
 import NotionPage from "../components/NotionPage";
+import { getSiteConfig } from "../lib/get-site-config";
 
 const notion = new NotionAPI();
 
 export const getStaticProps: GetStaticProps = async () => {
-  const recordMap = await notion.getPage("067dd719a912471ea9a3ac10710e7fdf");
+  const siteConfig = getSiteConfig();
+
+  const recordMap = await notion.getPage(siteConfig.rootPageId);
 
   return {
     props: {
@@ -27,11 +30,7 @@ const Home: NextPage<Props> = ({ recordMap }) => {
       <Head>
         <title>Next.js + Tailwind CSS + Notion Blog</title>
       </Head>
-      <div className="flex flex-col min-h-screen">
-        <div className="container mx-auto max-w-5xl">
-          <NotionPage recordMap={recordMap} />
-        </div>
-      </div>
+      <NotionPage recordMap={recordMap} />
     </>
   );
 };

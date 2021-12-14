@@ -13,9 +13,17 @@ import "rc-dropdown/assets/index.css";
 import "katex/dist/katex.min.css";
 
 import type { AppProps } from "next/app";
+import Layout from "../components/layouts/Layout";
+import { SiteContextProvider } from "../components/contexts/site/SiteContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <SiteContextProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </SiteContextProvider>
+  );
 }
 
 export default MyApp;
