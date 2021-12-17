@@ -14,7 +14,7 @@ const getPageData = async (pageId) => {
 const t = async () => {
   const notion = new notion_client.NotionAPI();
   console.log("Hi");
-  if (true) {
+  if (false) {
     const pageData = await getPageData(rootPageId);
     const realPageId = notion_utils.parsePageId(rootPageId);
     console.log("Hi", pageData);
@@ -24,9 +24,20 @@ const t = async () => {
     console.log("pageData", info["value"]["format"]["page_full_width"]);
   }
 
-  if (false) {
+  if (true) {
     const recordMap = await notion.getPage(rootPageId);
     console.log("recordMap", recordMap);
+    const realPageId = notion_utils.parsePageId(rootPageId);
+    console.log(
+      "format",
+      recordMap.block[realPageId]["value"]["format"]["page_full_width"]
+    );
+  }
+
+  if (false) {
+    const realPageId = notion_utils.parsePageId(rootPageId);
+    const data = await notion.getBlocks([realPageId]);
+    console.log("data", data.recordMap.block[realPageId]["value"]["format"]);
   }
 
   if (false) {
